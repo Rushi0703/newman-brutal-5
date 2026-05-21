@@ -1,0 +1,9 @@
+{
+  "id": "dev-env",
+  "name": "dev",
+  "values": [
+    { "key": "baseurl", "value": "https://dummyjson.com", "enabled": true },
+    { "key": "httpbinBase", "value": "https://httpbin.org", "enabled": true },
+    { "key": "countryName", "value": "Germany", "enabled": true }
+  ]
+}

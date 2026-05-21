@@ -1,0 +1,484 @@
+{
+  "info": {
+    "_postman_id": "69c9d59f-08c3-42e9-8752-54846db9d754",
+    "name": "auth-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23465596"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Post-Request 1--Login-API",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus =\r",
+                  "parseInt(pm.iterationData.get(\"expectedStatus\"));\r",
+                  "\r",
+                  "pm.test(\"Status code check\", function () {\r",
+                  "    pm.response.to.have.status(expectedStatus);\r",
+                  "});\r",
+                  "\r",
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "if (expectedStatus === 200) {\r",
+                  "\r",
+                  "    pm.environment.set(\r",
+                  "      \"capturedToken\",\r",
+                  "      json.accessToken\r",
+                  "    );\r",
+                  "\r",
+                  "    pm.environment.set(\r",
+                  "      \"refreshToken\",\r",
+                  "      json.refreshToken\r",
+                  "    );\r",
+                  "\r",
+                  "    pm.test(\"Token exists\", function () {\r",
+                  "        pm.expect(\r",
+                  "          json.accessToken.startsWith(\"eyJ\")\r",
+                  "        ).to.be.true;\r",
+                  "    });\r",
+                  "\r",
+                  "} else {\r",
+                  "\r",
+                  "    pm.test(\"Error message exists\", function () {\r",
+                  "        pm.expect(\r",
+                  "          json.message.length\r",
+                  "        ).to.be.above(0);\r",
+                  "    });\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{csv_username}}\",\r\n  \"password\": \"{{csv_password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseurl}}/auth/login",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 2 — /auth/me",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"firstName non-empty\", () => {\r",
+                  "    pm.expect(pm.response.json().firstName).to.be.a('string').and.not.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "Bearer{{capturedToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/auth/me",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 3 — HTTPBin Bearer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Authenticated\", () => {\r",
+                  "    pm.expect(\r",
+                  "      json.authenticated\r",
+                  "    ).to.eql(true);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "Bearer{{capturedToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{httpbinBase}}/bearer",
+              "host": [
+                "{{httpbinBase}}"
+              ],
+              "path": [
+                "bearer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 4 — Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"New accessToken is string\", () => {\r",
+                  "    pm.expect(pm.response.json().accessToken).to.be.a('string');\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"refreshToken\": \"{{capturedRefreshToken}}\", \"expiresInMins\": 30 }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseurl}}/auth/refresh",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authenticated Ops",
+      "item": [
+        {
+          "name": "Request 5 — GET /auth/me NO token:",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401 - no token\", () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/auth/me",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 6 — GET /auth/me BROKEN token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401 - broken token\", () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "Bearer{{capturedToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/auth/me",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 7 — GET /users/1:",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"id is 1\", () => pm.expect(pm.response.json().id).to.equal(1));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "Bearer{{capturedToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/users/1",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 8 — GET /users/9999:",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/users/9999",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "users",
+                "9999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request 9 — GET HTTPBin /headers:",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Authorization header echoed\", () => {\r",
+                  "    const authHeader = pm.response.json().headers.Authorization;\r",
+                  "    pm.expect(authHeader).to.match(/^Bearer /);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "Bearer {{capturedToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{httpbinBase}}/headers",
+              "host": [
+                "{{httpbinBase}}"
+              ],
+              "path": [
+                "headers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Request 10 — POST JSONPlaceholder /posts",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// In Pre-request script:\r",
+                  "const token = pm.collectionVariables.get(\"capturedToken\") || \"\";\r",
+                  "pm.collectionVariables.set(\"tokenPrefix\", token.substring(0, 10));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"title\": \"{{tokenPrefix}}\", \"body\": \"audit post\", \"userId\": 1 }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://jsonplaceholder.typicode.com/posts",
+              "protocol": "https",
+              "host": [
+                "jsonplaceholder",
+                "typicode",
+                "com"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Negative Auth",
+      "item": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "tokenPrefix",
+      "value": ""
+    }
+  ]
+}

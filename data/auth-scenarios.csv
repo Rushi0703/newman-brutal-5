@@ -1,0 +1,13 @@
+csv_username,csv_password,expectedStatus,scenario,shouldHaveToken
+emilys,emilyspass,200,valid-primary,true
+michaelw,michaelwpass,200,valid-secondary,true
+sophiab,sophiabpass,200,valid-tertiary,true
+emilys,WRONGPASSWORD,400,wrong-password,false
+NOSUCHUSER,anypassword,400,nonexistent-user,false
+emilys,,400,empty-password,false
+,emilyspass,400,empty-username,false
+admin,admin,400,common-weak-creds,false
+emilys,emilyspass,200,duplicate-valid-1,true
+emilys,emilyspass,200,duplicate-valid-2,true
+12345,12345,400,numeric-creds,false
+emilys@x.dummyjson.com,emilyspass,400,email-as-username,false

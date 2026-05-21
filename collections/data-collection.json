@@ -1,0 +1,767 @@
+{
+  "info": {
+    "_postman_id": "64349695-bb36-4b6c-b5fe-04a4af938733",
+    "name": "data-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23465596"
+  },
+  "item": [
+    {
+      "name": "Negative Auth",
+      "item": [
+        {
+          "name": "GET-Request1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus = parseInt(pm.iterationData.get('expectedStatus'));\r",
+                  "pm.test(\"Status correct\", () => pm.response.to.have.status(expectedStatus));\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    const minPrice = parseFloat(pm.iterationData.get('minPrice'));\r",
+                  "    const maxPrice = parseFloat(pm.iterationData.get('maxPrice'));\r",
+                  "    pm.test(\"Price in range\", () => {\r",
+                  "        pm.expect(json.price).to.be.at.least(minPrice);\r",
+                  "        pm.expect(json.price).to.be.at.most(maxPrice);\r",
+                  "    });\r",
+                  "    const expectedCat = pm.iterationData.get('expectedCategory');\r",
+                  "    if (expectedCat) {\r",
+                  "        pm.test(\"Category matches\", () => pm.expect(json.category).to.eql(expectedCat));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/{{productId}}}",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus = parseInt(pm.iterationData.get('expectedStatus'));\r",
+                  "pm.test(\"Status correct\", () => pm.response.to.have.status(expectedStatus));\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    const minPrice = parseFloat(pm.iterationData.get('minPrice'));\r",
+                  "    const maxPrice = parseFloat(pm.iterationData.get('maxPrice'));\r",
+                  "    pm.test(\"Price in range\", () => {\r",
+                  "        pm.expect(json.price).to.be.at.least(minPrice);\r",
+                  "        pm.expect(json.price).to.be.at.most(maxPrice);\r",
+                  "    });\r",
+                  "    const expectedCat = pm.iterationData.get('expectedCategory');\r",
+                  "    if (expectedCat) {\r",
+                  "        pm.test(\"Category matches\", () => pm.expect(json.category).to.eql(expectedCat));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/{{productId}}",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus = parseInt(pm.iterationData.get('expectedStatus'));\r",
+                  "pm.test(\"Status correct\", () => pm.response.to.have.status(expectedStatus));\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    const minPrice = parseFloat(pm.iterationData.get('minPrice'));\r",
+                  "    const maxPrice = parseFloat(pm.iterationData.get('maxPrice'));\r",
+                  "    pm.test(\"Price in range\", () => {\r",
+                  "        pm.expect(json.price).to.be.at.least(minPrice);\r",
+                  "        pm.expect(json.price).to.be.at.most(maxPrice);\r",
+                  "    });\r",
+                  "    const expectedCat = pm.iterationData.get('expectedCategory');\r",
+                  "    if (expectedCat) {\r",
+                  "        pm.test(\"Category matches\", () => pm.expect(json.category).to.eql(expectedCat));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/{{productId}}",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request4",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus = parseInt(pm.iterationData.get('expectedStatus'));\r",
+                  "pm.test(\"Status correct\", () => pm.response.to.have.status(expectedStatus));\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    const minPrice = parseFloat(pm.iterationData.get('minPrice'));\r",
+                  "    const maxPrice = parseFloat(pm.iterationData.get('maxPrice'));\r",
+                  "    pm.test(\"Price in range\", () => {\r",
+                  "        pm.expect(json.price).to.be.at.least(minPrice);\r",
+                  "        pm.expect(json.price).to.be.at.most(maxPrice);\r",
+                  "    });\r",
+                  "    const expectedCat = pm.iterationData.get('expectedCategory');\r",
+                  "    if (expectedCat) {\r",
+                  "        pm.test(\"Category matches\", () => pm.expect(json.category).to.eql(expectedCat));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/{{productId}}",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request5",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const expectedStatus = parseInt(pm.iterationData.get('expectedStatus'));\r",
+                  "pm.test(\"Status correct\", () => pm.response.to.have.status(expectedStatus));\r",
+                  "\r",
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    const minPrice = parseFloat(pm.iterationData.get('minPrice'));\r",
+                  "    const maxPrice = parseFloat(pm.iterationData.get('maxPrice'));\r",
+                  "    pm.test(\"Price in range\", () => {\r",
+                  "        pm.expect(json.price).to.be.at.least(minPrice);\r",
+                  "        pm.expect(json.price).to.be.at.most(maxPrice);\r",
+                  "    });\r",
+                  "    const expectedCat = pm.iterationData.get('expectedCategory');\r",
+                  "    if (expectedCat) {\r",
+                  "        pm.test(\"Category matches\", () => pm.expect(json.category).to.eql(expectedCat));\r",
+                  "    }\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/{{productId}}",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "{{productId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request6",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Total products is 194\", function () {\r",
+                  "    pm.expect(body.total).to.eql(194);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"All product prices > 0\", function () {\r",
+                  "\r",
+                  "    body.products.forEach(product => {\r",
+                  "\r",
+                  "        pm.expect(product.price)\r",
+                  "            .to.be.above(0);\r",
+                  "\r",
+                  "    });\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products?limit=0",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request7",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct category count\", function () {\r",
+                  "    pm.expect(body.length).to.eql(24);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseurl}}/products/category-list",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "products",
+                "category-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-Request8-RestCountries API",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Country array exists\", function () {\r",
+                  "    pm.expect(body.length)\r",
+                  "        .to.be.above(0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Country name exists\", function () {\r",
+                  "    pm.expect(\r",
+                  "        body[0].name.common\r",
+                  "    ).to.not.be.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://restcountries.com/v3.1/name/India",
+              "protocol": "https",
+              "host": [
+                "restcountries",
+                "com"
+              ],
+              "path": [
+                "v3.1",
+                "name",
+                "India"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 9 — Another Country",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Capital exists\", function () {\r",
+                  "\r",
+                  "    pm.expect(\r",
+                  "        body[0].capital[0]\r",
+                  "    ).to.not.be.empty;\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://restcountries.com/v3.1/name/Germany",
+              "protocol": "https",
+              "host": [
+                "restcountries",
+                "com"
+              ],
+              "path": [
+                "v3.1",
+                "name",
+                "Germany"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 10 — London Weather (Open-Meteo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Current weather exists\", function () {\r",
+                  "\r",
+                  "    pm.expect(\r",
+                  "        body.current_weather\r",
+                  "    ).to.exist;\r",
+                  "\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Temperature exists\", function () {\r",
+                  "\r",
+                  "    pm.expect(\r",
+                  "        body.current_weather.temperature\r",
+                  "    ).to.be.a(\"number\");\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current_weather=true",
+              "protocol": "https",
+              "host": [
+                "api",
+                "open-meteo",
+                "com"
+              ],
+              "path": [
+                "v1",
+                "forecast"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "51.5072"
+                },
+                {
+                  "key": "longitude",
+                  "value": "-0.1276"
+                },
+                {
+                  "key": "current_weather",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 11 — JSONPlaceholder Nested Comments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is array\", function () {\r",
+                  "    pm.expect(body)\r",
+                  "        .to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"All comments belong to post\", function () {\r",
+                  "\r",
+                  "    body.forEach(comment => {\r",
+                  "\r",
+                  "        pm.expect(comment.postId)\r",
+                  "            .to.eql(\r",
+                  "                Number(\r",
+                  "                    pm.environment.get(\r",
+                  "                        \"postId\"\r",
+                  "                    )\r",
+                  "                )\r",
+                  "            );\r",
+                  "\r",
+                  "    });\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://jsonplaceholder.typicode.com/posts/1/comments",
+              "protocol": "https",
+              "host": [
+                "jsonplaceholder",
+                "typicode",
+                "com"
+              ],
+              "path": [
+                "posts",
+                "1",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 12 — User Posts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is array\", function () {\r",
+                  "    pm.expect(body)\r",
+                  "        .to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"All posts belong to user\", function () {\r",
+                  "\r",
+                  "    body.forEach(post => {\r",
+                  "\r",
+                  "        pm.expect(post.userId)\r",
+                  "            .to.eql(\r",
+                  "                Number(\r",
+                  "                    pm.environment.get(\r",
+                  "                        \"userId\"\r",
+                  "                    )\r",
+                  "                )\r",
+                  "            );\r",
+                  "\r",
+                  "    });\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://jsonplaceholder.typicode.com/users/1/posts",
+              "protocol": "https",
+              "host": [
+                "jsonplaceholder",
+                "typicode",
+                "com"
+              ],
+              "path": [
+                "users",
+                "1",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GEt-REQUEST 13 — Extra JSONPlaceholder Validation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Posts array returned\", function () {\r",
+                  "    pm.expect(body)\r",
+                  "        .to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Posts not empty\", function () {\r",
+                  "    pm.expect(body.length)\r",
+                  "        .to.be.above(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://jsonplaceholder.typicode.com/posts",
+              "protocol": "https",
+              "host": [
+                "jsonplaceholder",
+                "typicode",
+                "com"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 14 — HTTPBin Delay",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response > 2000ms\", function () {\r",
+                  "\r",
+                  "    pm.expect(\r",
+                  "        pm.response.responseTime\r",
+                  "    ).to.be.above(2000);\r",
+                  "\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response < 5000ms\", function () {\r",
+                  "\r",
+                  "    pm.expect(\r",
+                  "        pm.response.responseTime\r",
+                  "    ).to.be.below(5000);\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{httpbinBase}}/delay/2",
+              "host": [
+                "{{httpbinBase}}"
+              ],
+              "path": [
+                "delay",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET-REQUEST 15 — Audit POST",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Audit returned id\", function () {\r",
+                  "    pm.expect(body.id)\r",
+                  "        .to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"validatedProducts\": 20,\r\n  \"status\": \"completed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://jsonplaceholder.typicode.com/posts",
+              "protocol": "https",
+              "host": [
+                "jsonplaceholder",
+                "typicode",
+                "com"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

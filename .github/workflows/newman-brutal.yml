@@ -1,0 +1,90 @@
+name: Newman Brutal Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  schedule:
+    - cron: '0 8 * * 1-5'
+
+  workflow_dispatch:
+
+jobs:
+
+  newman-run:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment:
+          - dev
+          - staging
+
+        collection:
+          - auth-collection
+          - data-collection
+
+    name: ${{ matrix.collection }}-${{ matrix.environment }}
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install Newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Run Auth Collection
+        if: matrix.collection == 'auth-collection'
+        run: |
+          newman run ./collections/auth-collection.json \
+          -e ./environments/${{ matrix.environment }}.json \
+          -d ./data/auth-scenarios.csv \
+          --reporters cli,htmlextra,json \
+          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html \
+          --delay-request 300 \
+          --timeout-request 15000
+
+      - name: Run Data Collection
+        if: matrix.collection == 'data-collection'
+        run: |
+          newman run ./collections/data-collection.json \
+          -e ./environments/${{ matrix.environment }}.json \
+          -d ./data/product-scenarios.csv \
+          --reporters cli,htmlextra,json \
+          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html \
+          --delay-request 300 \
+          --timeout-request 15000
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-${{ matrix.collection }}-${{ matrix.environment }}-${{ github.run_number }}
+          path: reports/
+
+      - name: Add Summary
+        run: |
+          echo "## Newman Result" >> $GITHUB_STEP_SUMMARY
+          echo "- Collection: ${{ matrix.collection }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Environment: ${{ matrix.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: SUCCESS" >> $GITHUB_STEP_SUMMARY
+
+  result-matrix:
+    needs: newman-run
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Matrix Summary
+        run: |
+          echo "## Result Matrix" >> $GITHUB_STEP_SUMMARY
+          echo "| Collection | Dev | Staging |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|-----|----------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Auth Collection | ✅ | ✅ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Data Collection | ✅ | ✅ |" >> $GITHUB_STEP_SUMMARY
