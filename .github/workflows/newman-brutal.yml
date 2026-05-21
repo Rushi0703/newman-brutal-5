@@ -43,23 +43,23 @@ jobs:
       - name: Run Auth Collection
         if: matrix.collection == 'auth-collection'
         run: |
-          newman run ./collections/auth-collection.json \
-          -e ./environments/${{ matrix.environment }}.json \
-          -d ./data/auth-scenarios.csv \
-          --reporters cli,htmlextra,json \
-          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html \
-          --delay-request 300 \
+          newman run ./collections/auth-collection.json
+          -e ./environments/${{ matrix.environment }}.json
+          -d ./data/auth-scenarios.csv
+          --reporters cli,htmlextra,json
+          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html
+          --delay-request 300
           --timeout-request 15000
 
       - name: Run Data Collection
         if: matrix.collection == 'data-collection'
         run: |
-          newman run ./collections/data-collection.json \
-          -e ./environments/${{ matrix.environment }}.json \
-          -d ./data/product-scenarios.csv \
-          --reporters cli,htmlextra,json \
-          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html \
-          --delay-request 300 \
+          newman run ./collections/data-collection.json
+          -e ./environments/${{ matrix.environment }}.json
+          -d ./data/product-scenarios.csv
+          --reporters cli,htmlextra,json
+          --reporter-htmlextra-export ./reports/${{ matrix.collection }}-${{ matrix.environment }}.html
+          --delay-request 300
           --timeout-request 15000
 
       - name: Upload Reports
