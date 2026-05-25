@@ -86,5 +86,5 @@ jobs:
           echo "## Result Matrix" >> $GITHUB_STEP_SUMMARY
           echo "| Collection | Dev | Staging |" >> $GITHUB_STEP_SUMMARY
           echo "|------------|-----|----------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Auth Collection | ✅ | ✅ |" >> $GITHUB_STEP_SUMMARY
-          echo "| Data Collection | ✅ | ✅ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Auth Collection |  |  |" >> $GITHUB_STEP_SUMMARY
+          echo "| Data Collection |  |  |" >> $GITHUB_STEP_SUMMARY
