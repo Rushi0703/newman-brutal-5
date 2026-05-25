@@ -22,8 +22,8 @@ jobs:
     strategy:
       matrix:
         environment:
-          - dev
-          - staging
+          - dev.postman_environment
+          - staging.postman_environment
 
         collection:
           - auth-collection
